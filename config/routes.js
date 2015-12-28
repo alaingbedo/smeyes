@@ -34,7 +34,9 @@ module.exports.routes = {
 
   '/': {
     view: 'homepage'
-  }
+  },
+
+  'get /data': 'ConnectionController.getData'
 
   /***************************************************************************
   *                                                                          *
