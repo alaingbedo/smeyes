@@ -1,14 +1,35 @@
 /**
 * Connection.js
 *
-* @description :: TODO: You might write a short summary of how this model works and what it represents here.
+* @description :: Object that represent a connection make by an student to a computer
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
 module.exports = {
 
-  attributes: {
-
-  }
+    attributes: {
+        username : {
+            type : 'string',
+            required : true
+        },
+        promo : {
+            type : 'string',
+            required : true
+        },
+        ip : {
+            type : 'string',
+            required : true
+        },
+        start : {
+            type : 'datetime',
+            required : true
+        },
+        end : {
+            type : 'datetime'
+        },
+        connectTo :{
+            model : 'pc'
+        }
+    }
 };
 

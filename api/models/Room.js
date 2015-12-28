@@ -1,14 +1,21 @@
 /**
 * Room.js
 *
-* @description :: TODO: You might write a short summary of how this model works and what it represents here.
+* @description :: Object that represents computer room
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
 module.exports = {
 
-  attributes: {
-
-  }
+    attributes: {
+        subnet : {
+            type : 'integer',
+            required : true
+        },
+        pcs : {
+            collection : 'pc',
+            via : 'container'
+        }
+    }
 };
 
