@@ -12,6 +12,10 @@ module.exports = {
             type : 'integer',
             required : true
         },
+        name : {
+            type : 'string',
+            required : true
+        },
         pcs : {
             collection : 'pc',
             via : 'container'
