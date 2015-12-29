@@ -5,7 +5,7 @@ var options = {
     //port: 80,
     host: 'localhost',
     port: 1337,
-    path: '/data'
+    path: '/test'
 };
 console.log("======get_connections");
 http.get(options, function(res) {
