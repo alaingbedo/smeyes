@@ -4,10 +4,14 @@
 var net = require('net');
 
 /*
- @description :: delete duplicate connection in the collection's array
+ @description :: alert duplicate connection in the collection's array
  */
-function deleteDuplicatedData(data) {
-
+function alertDuplicatedData(data, dataTable) { 
+    return dataTable.some(function(data1){
+        return ((data.username === data1.username)
+           && (data.ip === data1.ip)
+           && (data.promo === data1.promo));
+    });
 }
 
 /*
@@ -37,7 +41,9 @@ function parsing(data){
                 ip : splitRes2[2],
                 start : new Date().getTime()
             };
-            connectionsTable.push(connection);
+            
+            if(!alertDuplicatedData(connection, connectionsTable))
+                connectionsTable.push(connection);
             connection = {};
         }
 
