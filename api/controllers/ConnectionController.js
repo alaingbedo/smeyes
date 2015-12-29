@@ -22,7 +22,8 @@ module.exports = {
 
     getData: function (req, res) {
         var net, HOST, PORT, client, input,
-            splitRes1, splitRes2, login, ip, salle, promo;
+            splitRes1, splitRes2, login, ip, salle, promo,
+            connection, connections;
 
         net = require('net');
 
@@ -43,9 +44,10 @@ module.exports = {
         input = '';
         splitRes1 =  [];
         splitRes2 =  [];
+        connections = [];
+        connection = {};
         login = '';
         ip = '';
-        salle = '';
         promo = '';
 
         client.on('data', function (data) {
@@ -61,10 +63,18 @@ module.exports = {
                 splitRes2 = data.toString().split(" ");
                 if ((splitRes2[0] !== "") && (splitRes2[2] !== undefined)
                     && (splitRes2[2].indexOf(".") !== -1)) {
-
-                    login = splitRes2[1];
+                    
+                    connection = {
+                        username : splitRes2[1],
+                        promo : splitRes2[9],
+                        ip : splitRes2[2],
+                        start : new Date().getTime()
+                    };
+                    connections.push(connection);
+                    connection = {};                  
+                    
+                    /*login = splitRes2[1];
                     ip = splitRes2[2];
-                    salle = splitRes2[2];
                     promo = splitRes2[9];
                     
                     Connection.create({
@@ -80,7 +90,7 @@ module.exports = {
                         console.log('insert with success');
                     });
                     
-                    console.log(login + " / " + ip + " / " + salle + " / " + promo);
+                    console.log(login + " / " + ip + " / " + promo);*/
                 }
             });
 
@@ -97,7 +107,7 @@ module.exports = {
             console.log('Connection closed');
         });
 
-    };
+    }
     
 };
 
