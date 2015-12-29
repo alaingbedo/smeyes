@@ -19,8 +19,8 @@ module.exports = {
         ip : {
             type : 'string',
             required : true
-        },
-        start : {
+        }
+/*        start : {
             type : 'datetime',
             required : true
         },
@@ -29,7 +29,7 @@ module.exports = {
         },
         connectTo :{
             model : 'pc'
-        }
+        }*/
     }
 };
 

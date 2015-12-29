@@ -14,11 +14,11 @@ module.exports = {
         },
         container : {
             model : 'room'
-        },
-        connections : {
+        }
+/*        connections : {
             collection : 'connection',
             via : 'connectTo'
-        }
+        }*/
     }
 };
 
