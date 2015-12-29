@@ -52,9 +52,11 @@ function parsing(data){
 function getData(){
 
     return new Promise((resolve, reject)=>{
-        var HOST, PORT, client, connectionsTable;
+        var HOST, PORT, client, connectionsTable, input;
         HOST = 'ns-server.epita.fr';
         PORT = 4242;
+
+        input = '';
 
         client = new net.Socket();
         client.connect(PORT, HOST, function () {
@@ -65,13 +67,12 @@ function getData(){
         });
 
         client.on('data', function (data) {
-
-            //Split of data
-            connectionsTable = parsing(data);
+            input += data;
 
             // Close the client socket completely
             if (data.indexOf("rep 002 -- cmd end\n") !== -1) {
                 client.destroy();
+                connectionsTable = parsing(input);
                 resolve(connectionsTable);
             }
 
