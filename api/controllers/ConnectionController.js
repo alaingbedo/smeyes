@@ -66,6 +66,20 @@ module.exports = {
                     ip = splitRes2[2];
                     salle = splitRes2[2];
                     promo = splitRes2[9];
+                    
+                    Connection.create({
+                        username : splitRes2[1],
+                        promo : splitRes2[9],
+                        ip : splitRes2[2],
+                        start : new Date().getTime()
+                    })
+                    .exec(function(err, connection) {
+                    if (!err)
+                        console.log('error : ' + err);
+                    else
+                        console.log('insert with success');
+                    });
+                    
                     console.log(login + " / " + ip + " / " + salle + " / " + promo);
                 }
             });
@@ -83,6 +97,7 @@ module.exports = {
             console.log('Connection closed');
         });
 
-    }
+    };
+    
 };
 
