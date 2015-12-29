@@ -21,8 +21,9 @@ module.exports = {
     },
 
     getData: function (req, res) {
-        res.status(200).send(connections());
-        
+        connections().then((d)=>{
+            res.status(200).send(d);
+        });
     }
     
 };

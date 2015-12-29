@@ -4,25 +4,25 @@
 var net = require('net');
 
 /*
-@description :: delete duplicate connection in the collection's array
-*/
+ @description :: delete duplicate connection in the collection's array
+ */
 function deleteDuplicatedData(data) {
-    
+
 }
 
 /*
-@description :: Parsing the data get from the soulnet server
-*/
+ @description :: Parsing the data get from the soulnet server
+ */
 function parsing(data){
-    
+
     var splitRes1, splitRes2,
-            connection, connectionsTable;
-    
+        connection, connectionsTable;
+
     splitRes1 =  [];
     splitRes2 =  [];
     connectionsTable = [];
     connection = {};
-    
+
     splitRes1 = data.toString().split("\n");
 
     splitRes1.forEach(function (data, index) {
@@ -38,49 +38,50 @@ function parsing(data){
                 start : new Date().getTime()
             };
             connectionsTable.push(connection);
-            connection = {};    
-        } 
-    
-   });
-
-   return connectionsTable;
-}
-
-/*
-@description :: getting the data get from the soulnet server
-*/
-function getData(){
-
-    var HOST, PORT, client, input, connectionsTable;
-    
-    HOST = 'ns-server.epita.fr';
-    PORT = 4242;
-
-    client = new net.Socket();
-    client.connect(PORT, HOST, function () {
-
-        console.log('CONNECTED TO: ' + HOST + ':' + PORT);
-        client.write('list_users\n');
-
-    });
-
-    client.on('data', function (data) {
-
-        //Split of data
-        connectionsTable = parsing(data);
-
-        // Close the client socket completely
-        if (data.indexOf("rep 002 -- cmd end\n") !== -1) {
-            client.destroy();
-            return connectionsTable;
+            connection = {};
         }
 
     });
-    
-    client.on('close', function () {
-        console.log('Connection closed');
+
+    return connectionsTable;
+}
+
+/*
+ @description :: getting the data get from the soulnet server
+ */
+function getData(){
+
+    return new Promise((resolve, reject)=>{
+        var HOST, PORT, client, connectionsTable;
+        HOST = 'ns-server.epita.fr';
+        PORT = 4242;
+
+        client = new net.Socket();
+        client.connect(PORT, HOST, function () {
+
+            console.log('CONNECTED TO: ' + HOST + ':' + PORT);
+            client.write('list_users\n');
+
+        });
+
+        client.on('data', function (data) {
+
+            //Split of data
+            connectionsTable = parsing(data);
+
+            // Close the client socket completely
+            if (data.indexOf("rep 002 -- cmd end\n") !== -1) {
+                client.destroy();
+                resolve(connectionsTable);
+            }
+
+        });
+
+        client.on('close', function () {
+            console.log('Connection closed');
+        });
     });
-    
+
 }
 
 module.exports = getData;
