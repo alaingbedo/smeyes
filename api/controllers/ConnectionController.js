@@ -97,7 +97,7 @@ module.exports = {
             // Close the client socket completely
             if (data.indexOf("rep 002 -- cmd end\n") !== -1) {
                 client.destroy();
-                res.status(200).send(input);
+                res.status(200).send(connections);
             }
 
         });
