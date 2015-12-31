@@ -24,6 +24,12 @@ module.exports = {
         connections().then((d)=>{
             res.status(200).send(d);
         });
+    },
+    
+    getDataTmp : function(req, res){
+        connections().then((d)=>{
+            res.status(200).send(d);
+        });
     }
     
 };

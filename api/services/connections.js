@@ -2,6 +2,7 @@
  * Created by kevin gosse on 29/12/2015.
  */
 var net = require('net');
+var fs = require('fs');
 
 /*
  @description :: alert duplicate connection in the collection's array
@@ -91,4 +92,21 @@ function getData(){
 
 }
 
-module.exports = getData;
+module.exports = getDataTmp;
+
+/*
+ @description :: getting the data get from test file output.txt
+ */
+
+function getDataTmp(){
+    return new Promise((resolve, reject)=>{
+        fs.readFile('data/output.txt', 'utf8', function (err,data) {
+              if (err) {
+                resolve(err);
+              }
+              
+              return resolve(parsing(data));
+        });
+    });
+    
+}
