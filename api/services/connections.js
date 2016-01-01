@@ -92,7 +92,8 @@ function getData(){
 
 }
 
-module.exports = getDataTmp;
+//module.exports = getDataTmp;
+module.exports = getData;
 
 /*
  @description :: getting the data get from test file output.txt

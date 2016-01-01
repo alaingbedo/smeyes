@@ -38,7 +38,9 @@ module.exports.routes = {
 
   'get /data': 'ConnectionController.getData',
   'get /dataTmp': 'ConnectionController.getDataTmp',    
-  'get /test': 'ConnectionController.test'
+  'get /test': 'ConnectionController.test',
+  'get /initrooms': 'RoomController.init'
+
 
   /***************************************************************************
   *                                                                          *
