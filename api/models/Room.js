@@ -9,7 +9,7 @@ module.exports = {
 
     attributes: {
         subnet : {
-            type : 'integer',
+            type : 'string',
             required : true
         },
         name : {
@@ -18,7 +18,7 @@ module.exports = {
         },
         pcs : {
             collection : 'pc',
-            via : 'container'
+            via : 'room'
         }
     }
 };
