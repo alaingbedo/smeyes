@@ -6,6 +6,10 @@
  */
 
 module.exports = {
-	
+	init: function(req, res){
+        initPc().then((d)=>{
+            res.status(200).send(d);
+        });
+    }
 };
 
