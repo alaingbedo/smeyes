@@ -16,20 +16,16 @@ module.exports = {
             type : 'string',
             required : true
         },
-        ip : {
-            type : 'string',
-            required : true
-        }
-/*        start : {
+        start : {
             type : 'datetime',
             required : true
         },
         end : {
             type : 'datetime'
         },
-        connectTo :{
+        pc:{
             model : 'pc'
-        }*/
+        }
     }
 };
 

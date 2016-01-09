@@ -12,13 +12,13 @@ module.exports = {
             type : 'integer',
             required : true
         },
-        container : {
+        room: {
             model : 'room'
-        }
-/*        connections : {
+        },
+        connections : {
             collection : 'connection',
-            via : 'connectTo'
-        }*/
+            via : 'pc'
+        }
     }
 };
 

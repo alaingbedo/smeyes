@@ -16,7 +16,7 @@ module.exports = {
             {
                 subnet: '10.41.170',
                 name:   'lab cisco'
-            },
+            }   ,
             {
                 subnet: '10.41.179',
                 name:   'midlab'
