@@ -9,7 +9,7 @@ module.exports = {
 
     attributes: {
         number : {
-            type : 'integer',
+            type : 'string',
             required : true
         },
         room: {
