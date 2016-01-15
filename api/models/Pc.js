@@ -12,6 +12,12 @@ module.exports = {
             type : 'string',
             required : true
         },
+        r : {
+            type : 'integer'
+        },
+        p : {
+            type : 'integer'
+        },
         room: {
             model : 'room'
         },
