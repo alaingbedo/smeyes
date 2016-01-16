@@ -37,8 +37,8 @@ module.exports = {
                     newConnectionsData = theConnections.map((data, index)=>{
                         return {
                             'username' : data.username, 
-                            'promo': data.promo, 
-                            'ip': data.pc.ip
+                            'promo' : data.promo, 
+                            'ip' : data.pc.ip
                         };
                     });
                     newConnections = _.differenceWith(d,newConnectionsData, _.isEqual);
@@ -53,6 +53,10 @@ module.exports = {
                     });
                     
                     //insérer le tableau de new connection
+                    Connection
+                        .create(persistConnections)
+                        .then((out) => res.status(200).send(out))
+                        .catch((err) => res.status(500).send(err));
                 
                     oldConnectionsData = d.map((data, index)=>{
                         return {
@@ -63,14 +67,18 @@ module.exports = {
                             }
                         };
                     });
-                    oldConnections = _.differenceWith(theConnections,oldConnectionsData, _.isEqual);
-                    //mettre à jour la table connection
+                    oldConnections = _.differenceWith(theConnections, oldConnectionsData, _.isEqual);
                 
-                    res.status(200).json({ 'tab1' : newConnections, 'tab2' : oldConnections });
+                    oldConnections.forEach((data2)=> {
+                        Connection
+                            .update({ip : data2.ip}, {end : (new Date().getTime())})
+                            .then((out)=>res.status(200).send(out))
+                            .catch((err) => res.status(500).send(err)); 
+                    });
                 })
-                .catch((reason)=>{
-                    res.status(500).send(reason);
-                });
+            .catch((reason)=>{
+            res.status(500).send(reason);
+            });
         });
     },
     
@@ -81,6 +89,4 @@ module.exports = {
     }
     
 };
-
-//new Date().getTime()
 
