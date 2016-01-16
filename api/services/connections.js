@@ -7,11 +7,11 @@ var fs = require('fs');
 /*
  @description :: alert duplicate connection in the collection's array
  */
-function alertDuplicatedData(data, dataTable) { 
+function alertDuplicatedData(data, dataTable) {
     return dataTable.some(function(data1){
         return ((data.username === data1.username)
-           && (data.ip === data1.ip)
-           && (data.promo === data1.promo));
+        && (data.ip === data1.ip)
+        && (data.promo === data1.promo));
     });
 }
 
@@ -43,7 +43,7 @@ function parsing(data){
                 id : null,
                 start : new Date().getTime()
             };
-            
+
             if(!alertDuplicatedData(connection, connectionsTable))
                 connectionsTable.push(connection);
             connection = {};
@@ -87,6 +87,7 @@ function getData(){
         input = '';
 
         client = new net.Socket();
+        client.setTimeout(1000 * 60 * 2);
         client.connect(PORT, HOST, function () {
 
             console.log('CONNECTED TO: ' + HOST + ':' + PORT);
@@ -106,6 +107,13 @@ function getData(){
 
         });
 
+        client.on('timeout', function (data) {
+            console.log('timeout');
+            client.destroy();
+            connectionsTable = parsing(input);
+            resolve(connectionsTable);
+        });
+
         client.on('close', function () {
             console.log('Connection closed');
         });
@@ -123,12 +131,12 @@ module.exports = getData;
 function getDataTmp(){
     return new Promise((resolve, reject)=>{
         fs.readFile('data/output.txt', 'utf8', function (err,data) {
-              if (err) {
+            if (err) {
                 resolve(err);
-              }
-              
-              return resolve(parsing(data));
+            }
+
+            return resolve(parsing(data));
         });
     });
-    
+
 }
