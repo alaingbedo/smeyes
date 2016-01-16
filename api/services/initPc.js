@@ -9,6 +9,8 @@ function getPcJson(){
               var dataJson  = JSON.parse(data);
               return resolve(dataJson);
         });
+
+
     });
 }
 

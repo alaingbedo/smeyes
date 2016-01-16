@@ -5,43 +5,74 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
-module.exports = {
-	init: function(req, res){
-        var newPcs = [];
-        
-         initPc().then((d)=>{
-             Room.find()
-             .exec(function(err, rooms){
-                 if(err){
-                     res.status(500).send(res);
-                 }
-        
-                 var aPc = {};
-                 
-                 rooms.forEach(function (data, index) {
-                     d.forEach(function (data1, index1) {
-                        if(data1.ip.startsWith(data.subnet)){
-                            aPc = {
-                                number : data1.ip.split(".")[3],
-                                room : data.id
-                            };
-                            newPcs.push(aPc);
-                        }
+const dns = require('dns');
+const _ = require('lodash');
 
-                     });
-                 });
-                 
-                 aPc = null;
-                 
-                 Pc
-                    .findOrCreate(newPcs)
-                    .exec((err, out)=>{
-                        if (!err)
-                            console.log("pcs created !!!");
-                        res.status(200).send(out);
+module.exports = {
+    init: function(req, res){
+        Room.find()
+            .then((rooms)=> {
+                Promise.all(rooms.map(function (room) {
+                        return new Promise((resolve, reject) => {
+                            var pcs = [];
+                            var r = 1;
+                            var p = 1;
+                            var hasPost = true;
+                            var url = '';
+
+                            function processPC(){
+                                if (!hasPost) {
+                                    ++r;
+                                    p = 1;
+                                }
+                                url = 'r' + ( r < 10 ? '0' + r : r) + 'p' + (p < 10 ? '0' + p : p) + '.' + room.name + '.sm.cri.epita.net';
+                                dns.lookup(url, (err, addr, family) => {
+                                    if (addr) {
+                                        var pc = {
+                                            ip: addr,
+                                            room: room.id,
+                                            r,
+                                            p
+                                        };
+                                        pcs.push(pc);
+                                        hasPost = true;
+                                    }
+                                    else if (hasPost)
+                                        hasPost = false;
+                                    else {
+                                        resolve(pcs);
+                                        return;
+                                    }
+                                    ++p;
+                                    processPC();
+                                });
+                            }
+                            processPC();
+                        });
+                    }))
+                    .then((values) => {
+                        const pcs = _.flatten(values);
+                        Pc
+                            .findOrCreate(pcs)
+                            .exec((err, out) => {
+                                if (err)
+                                    res.status(500).send(err);
+                                else{
+                                    console.log("pcs created !!!");
+                                    res.status(200).send(out);
+                                }
+
+                            });
+                    })
+                    .catch((reason)=>{
+                        res.status(500).send(reason);
                     });
-             });
-         });
-     }
+            })
+            .catch((reason)=>{
+                res.status(500).send(reason);
+            });
+    }
 };
+
+
 
