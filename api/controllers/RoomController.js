@@ -23,16 +23,16 @@ module.exports = {
             },
             {
                 subnet: '10.224.34',
-                name:   'sr'
+                name:   'labsr'
             },
             {
                 subnet: '10.224.35',
-                name:   'sm-14'
-            },
+                name:   'sm14'
+            }/*,
             {
                 subnet: '10.224.36',
                 name:   'sm-15'
-            }
+            }*/
         ];
 
         Room

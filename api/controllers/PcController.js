@@ -25,7 +25,7 @@ module.exports = {
                                 number : data1.ip.split(".")[3],
                                 room : data.id
                             };
-                            newPcs.push(aPc);   
+                            newPcs.push(aPc);
                         }
 
                      });

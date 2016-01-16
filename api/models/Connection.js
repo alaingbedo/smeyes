@@ -23,7 +23,7 @@ module.exports = {
         end : {
             type : 'datetime'
         },
-        pc:{
+        pc : {
             model : 'pc'
         }
     }

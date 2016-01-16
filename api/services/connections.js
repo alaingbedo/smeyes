@@ -40,6 +40,7 @@ function parsing(data){
                 username : splitRes2[1],
                 promo : splitRes2[9],
                 ip : splitRes2[2],
+                id : null,
                 start : new Date().getTime()
             };
             
@@ -51,6 +52,26 @@ function parsing(data){
     });
 
     return connectionsTable;
+}
+
+/*
+ @description :: get pc id
+*/
+function getPcOfConnections(ips){
+    return Pc.find()
+        .then((pcs)=>{
+            pcs.forEach((data, index)=>{
+                ips.forEach((data1, index1)=>{
+                    if(data.ip == data1.ip){
+                        data1.id = data.id;
+                    }
+                });
+            });  
+            return ips;
+    })
+        .catch((reason)=>{
+           return ips;     
+    });
 }
 
 /*
@@ -79,7 +100,7 @@ function getData(){
             // Close the client socket completely
             if (data.indexOf("rep 002 -- cmd end\n") !== -1) {
                 client.destroy();
-                connectionsTable = parsing(input);
+                connectionsTable = getPcOfConnections(parsing(input)).filter((data3)=> data3.id);
                 resolve(connectionsTable);
             }
 
