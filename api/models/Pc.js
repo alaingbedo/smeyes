@@ -8,7 +8,7 @@
 module.exports = {
 
     attributes: {
-        number : {
+        ip: {
             type : 'string',
             required : true
         },
