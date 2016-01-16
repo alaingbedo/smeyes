@@ -10,20 +10,28 @@ module.exports = {
     init: function(req, res){
         var data = [
             {
-                subnet: '10.41.176',
-                name:   'lab pasteur'
+                subnet: '10.224.31',
+                name:   'pasteur'
             },
             {
-                subnet: '10.41.170',
-                name:   'lab cisco'
-            }   ,
+                subnet: '10.224.32',
+                name:   'cisco'
+            },
             {
-                subnet: '10.41.179',
+                subnet: '10.224.33',
                 name:   'midlab'
             },
             {
-                subnet: '10.41.174',
-                name:   'sm14'
+                subnet: '10.224.34',
+                name:   'sr'
+            },
+            {
+                subnet: '10.224.35',
+                name:   'sm-14'
+            },
+            {
+                subnet: '10.224.36',
+                name:   'sm-15'
             }
         ];
 
