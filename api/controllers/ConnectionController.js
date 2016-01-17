@@ -33,6 +33,7 @@ module.exports = {
                     var newConnectionsData = [];
                     var oldConnectionsData = [];
                     var persistConnections = [];
+                    var result = {'newConnections' : null, 'oldConnections' : null};
                 
                     newConnectionsData = theConnections.map((data, index)=>{
                         return {
@@ -41,22 +42,28 @@ module.exports = {
                             'ip' : data.pc.ip
                         };
                     });
-                    newConnections = _.differenceWith(d,newConnectionsData, _.isEqual);
-                    persistConnections  = newConnections.map((data, index)=>{
-                        return {
-                            'username' : data.username, 
-                            'promo' : data.promo, 
-                            'start' : data.start,
-                            'end' : null,
-                            'pc' : data.id 
-                        };
-                    });
+                    newConnections = _.differenceWith(d,newConnectionsData, connectionComparator.compareNewConnections);
                     
-                    //insérer le tableau de new connection
-                    Connection
-                        .create(persistConnections)
-                        .then((out) => res.status(200).send(out))
-                        .catch((err) => res.status(500).send(err));
+                    if(newConnections.length !== 0){
+                        persistConnections  = newConnections.map((data, index)=>{
+                            return {
+                                'username' : data.username, 
+                                'promo' : data.promo, 
+                                'start' : data.start,
+                                'end' : null,
+                                'pc' : data.id 
+                            };
+                        });
+
+                        //insérer le tableau de new connection
+                        Connection
+                            .create(persistConnections)
+                            .then((out)=>result.newConnections = out)
+                            .catch((err)=>result.newConnections = err);
+                    }
+                    else{
+                        result.newConnections = 'There is no new connections' ;
+                    }
                 
                     oldConnectionsData = d.map((data, index)=>{
                         return {
@@ -67,14 +74,20 @@ module.exports = {
                             }
                         };
                     });
-                    oldConnections = _.differenceWith(theConnections, oldConnectionsData, _.isEqual);
-                
-                    oldConnections.forEach((data2)=> {
-                        Connection
-                            .update({ip : data2.ip}, {end : (new Date().getTime())})
-                            .then((out)=>res.status(200).send(out))
-                            .catch((err) => res.status(500).send(err)); 
-                    });
+                    oldConnections = _.differenceWith(theConnections, oldConnectionsData, connectionComparator.compareOldConnections);
+                    
+                    if(oldConnections.length !== 0){
+                        oldConnections.forEach((data2)=> {
+                            Connection
+                                .update({ip : data2.ip}, {end : (new Date())})
+                                .then((out)=>result.oldConnections = out)
+                                .catch((err)=>result.oldConnections = err);
+                        });
+                    }
+                    else{
+                        result.oldConnections = 'There is no old connections';
+                    }
+                    res.status(200).json(result);
                 })
             .catch((reason)=>{
             res.status(500).send(reason);

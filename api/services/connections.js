@@ -41,7 +41,7 @@ function parsing(data){
                 promo : splitRes2[9],
                 ip : splitRes2[2],
                 id : null,
-                start : new Date().getTime()
+                start : new Date()
             };
 
             if(!alertDuplicatedData(connection, connectionsTable))
