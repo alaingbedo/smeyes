@@ -34,7 +34,34 @@ module.exports = {
                     var oldConnectionsData = [];
                     var persistConnections = [];
                     var result = {'newConnections' : null, 'oldConnections' : null};
+                    
+                    //Deconnection
+                    oldConnectionsData = d.map((data, index)=>{
+                        return {
+                            'username' : data.username, 
+                            'promo': data.promo,
+                            'pc' : {
+                                'ip' : data.ip
+                            }
+                        };
+                    });
+                    oldConnections = _.differenceWith(theConnections, oldConnectionsData, connectionComparator.compareOldConnections);
+                    
+                    if(oldConnections.length !== 0){
+                        var cpt = 0;
+                        oldConnections.forEach((data2)=> {
+                            Connection
+                                .update({id : data2.id}, {end : (new Date())})
+                                .then((out)=> cpt += out.length)
+                                .catch((err)=> cpt -=1);
+                        });
+                        result.oldConnections = 'There is ' + cpt + ' update connections';
+                    }
+                    else{
+                        result.oldConnections = 'There is no old connection';
+                    }
                 
+                    //Connection
                     newConnectionsData = theConnections.map((data, index)=>{
                         return {
                             'username' : data.username, 
@@ -45,6 +72,7 @@ module.exports = {
                     newConnections = _.differenceWith(d,newConnectionsData, connectionComparator.compareNewConnections);
                     
                     if(newConnections.length !== 0){
+                        var cpt2 = 0;
                         persistConnections  = newConnections.map((data, index)=>{
                             return {
                                 'username' : data.username, 
@@ -58,35 +86,15 @@ module.exports = {
                         //insérer le tableau de new connection
                         Connection
                             .create(persistConnections)
-                            .then((out)=>result.newConnections = out)
-                            .catch((err)=>result.newConnections = err);
+                            .then(result.newConnections = (out)=>  cpt2 = out.length)
+                            .catch((err)=>cpt2 = 0);
+                        
+                        result.oldConnections = 'There is ' + cpt2 + ' update connections';
                     }
                     else{
-                        result.newConnections = 'There is no new connections' ;
+                        result.newConnections = 'There is no new connection' ;
                     }
-                
-                    oldConnectionsData = d.map((data, index)=>{
-                        return {
-                            'username' : data.username, 
-                            'promo': data.promo,
-                            'pc' : {
-                                'ip' : data.ip
-                            }
-                        };
-                    });
-                    oldConnections = _.differenceWith(theConnections, oldConnectionsData, connectionComparator.compareOldConnections);
-                    
-                    if(oldConnections.length !== 0){
-                        oldConnections.forEach((data2)=> {
-                            Connection
-                                .update({ip : data2.ip}, {end : (new Date())})
-                                .then((out)=>result.oldConnections = out)
-                                .catch((err)=>result.oldConnections = err);
-                        });
-                    }
-                    else{
-                        result.oldConnections = 'There is no old connections';
-                    }
+            
                     res.status(200).json(result);
                 })
             .catch((reason)=>{
