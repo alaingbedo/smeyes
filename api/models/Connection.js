@@ -17,11 +17,11 @@ module.exports = {
             required : true
         },
         start : {
-            type : 'datetime',
+            type : 'date',
             required : true
         },
         end : {
-            type : 'datetime'
+            type : 'date'
         },
         pc : {
             model : 'pc'

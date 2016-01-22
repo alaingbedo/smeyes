@@ -3,6 +3,7 @@
  */
 var net = require('net');
 var fs = require('fs');
+var moment = require('moment');
 
 /*
  @description :: alert duplicate connection in the collection's array
