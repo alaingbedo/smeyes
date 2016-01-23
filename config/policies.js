@@ -26,9 +26,15 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
+<<<<<<< HEAD
     '*': false,
     
     RoomController : {
+=======
+   '*': false,
+
+    ConnectionController: {
+>>>>>>> add connection api
         '*': true
     }
 

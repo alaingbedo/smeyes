@@ -14,7 +14,6 @@ A dashboard (Mobile application and Web application) that shows all the PC’s a
 
 ```json
 {
-    roomId: string
 }
 ```
 
@@ -29,7 +28,6 @@ A dashboard (Mobile application and Web application) that shows all the PC’s a
 
 ```json
 {
-    roomId: string
 }
 ```
 
@@ -37,21 +35,15 @@ A dashboard (Mobile application and Web application) that shows all the PC’s a
 
 ```json
 {
-    roomId: string
 }
 ```
 
 #### GET /connections/current/nb : returns the number of connected users
 
 ```json
+// SUCCESS RESPONSE DATA
 {
-}
-```
-
-#### GET /connections/current/promo : returns connected users by promo
-
-```json
-{
+    nb: integer
 }
 ```
 
@@ -63,7 +55,7 @@ A dashboard (Mobile application and Web application) that shows all the PC’s a
     username: string
 }
 
-// RESPONSE DATA
+// SUCCESS RESPONSE DATA
 {
     connected: boolean
 }
