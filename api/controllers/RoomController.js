@@ -42,6 +42,50 @@ module.exports = {
                     console.log("rooms created !!!");
                 res.status(200).send(out);
             });
-    }
+    },
+    
+    all : function(req, res){
+        Room 
+            .find()
+            .exec((err, out)=>{
+                if (!err)
+                res.status(200).json(out);
+            });
+    },
+    
+    one : function(req, res){
+        Room
+            .findOne()
+            .where({id : req.param('id')})
+            .exec((err, out)=>{
+                if (!err)
+                res.status(200).json(out);
+            });
+    },
+    
+   roomsAvailability : function(req, res){
+       Room 
+            .find()
+            .populate('pcs')
+            .then((rooms)=>{
+                Connection
+                    .find({end : null})
+                    .populate('pc')
+                    .then((connections)=>{
+                        var result = [];
+                        rooms.forEach((theRoom)=>{
+                            var roomAv = {};
+                            var nb = connections.filter((d)=> d.pc.room == theRoom.id).length;
+                            roomAv.room = theRoom.name;
+                            var percent = (nb*100)/theRoom.pcs.length;
+                            roomAv.availability = Math.round(percent*100)/100;
+                            result.push(roomAv);
+                        });
+                        res.status(200).send(result);  
+                    })
+            })
+            .catch((reason)=> res.status(200).json(reason))
+   } 
+    
 };
 

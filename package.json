@@ -37,5 +37,8 @@
     "url": "git://github.com/anonymous node/sails user/test.git"
   },
   "author": "anonymous node/sails user",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "sails-hook-autoreload": "^0.13.0"
+  }
 }
