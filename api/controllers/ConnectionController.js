@@ -49,9 +49,13 @@ module.exports = {
                     
                     if(oldConnections.length !== 0){
                         var cpt = 0;
-                        oldConnections.forEach((data2)=> {
+                        oldConnections.forEach((data2)=> {    
+                            var d = new Date();
+                            var offset = new Date().getTimezoneOffset(); 
+                            d.setMinutes(d.getMinutes() - offset);
+                            
                             Connection
-                                .update({id : data2.id}, {end : (new Date())})
+                                .update({id : data2.id}, {end : d})
                                 .then((out)=> cpt += out.length)
                                 .catch((err)=> cpt -=1);
                         });
@@ -104,9 +108,14 @@ module.exports = {
     },
     
     getDataTmp : function(req, res){
-        connections().then((d)=>{
-            res.status(200).send(d);
+        //connections().then((d)=>{
+        Connection.find()
+        .then((connexions)=> res.status(200).json(connexions))
+        .catch((reason)=>{
+            res.status(500).send(reason);
         });
+            
+        //});
     }
     
 };
