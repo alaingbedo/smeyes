@@ -1,6 +1,6 @@
 var net = require('net');
 var fs = require('fs');
-var moment = require('moment');
+const moment = require('moment');
 
 /*
  @description :: alert duplicate connection in the collection's array
@@ -33,17 +33,13 @@ function parsing(data){
         splitRes2 = data.toString().split(" ");
         if ((splitRes2[0] !== "") && (splitRes2[2] !== undefined)
             && (splitRes2[2].indexOf(".") !== -1)) {
-            
-            var d = new Date();
-            var offset = new Date().getTimezoneOffset(); 
-            d.setMinutes(d.getMinutes() - offset);
 
             connection = {
                 username : splitRes2[1],
                 promo : splitRes2[9],
                 ip : splitRes2[2],
                 id : null,
-                start : d
+                start : moment().format('YYYY-MM-DD HH:mm:ss')
             };
 
             if(!alertDuplicatedData(connection, connectionsTable))

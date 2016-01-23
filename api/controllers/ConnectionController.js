@@ -6,6 +6,7 @@
  */
 
 var _ = require('lodash');
+const moment = require('moment');
 
 module.exports = {
 
@@ -59,11 +60,9 @@ module.exports = {
                     if(oldConnections.length !== 0){
                         var cpt = 0;
                         oldConnections.forEach((data2)=> {
-                            var d = new Date();
-                            var offset = new Date().getTimezoneOffset();
-                            d.setMinutes(d.getMinutes() - offset);
+                            
                             Connection
-                                .update({id : data2.id}, {end : d})
+                                .update({id : data2.id}, {end : (moment().format('YYYY-MM-DD HH:mm:ss'))})
                                 .then((out)=> cpt += out.length)
                                 .catch((err)=> cpt -=1);
                         });
