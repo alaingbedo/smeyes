@@ -68,7 +68,7 @@ module.exports = {
                                 .then((out)=> cpt += out.length)
                                 .catch((err)=> cpt -=1);
                         });
-                        result.oldConnections = 'There is ' + cpt + ' update connections';
+                        result.oldConnections = 'There is some update connections';
                     }
                     else{
                         result.oldConnections = 'There is no old connection';
@@ -102,7 +102,7 @@ module.exports = {
                             .then(result.newConnections = (out)=>  cpt2 = out.length)
                             .catch((err)=>cpt2 = 0);
                         
-                        result.oldConnections = 'There is ' + cpt2 + ' update connections';
+                        result.newConnections = 'There is some new connections';
                     }
                     else{
                         result.newConnections = 'There is no new connection' ;
