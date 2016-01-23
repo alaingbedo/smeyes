@@ -10,7 +10,13 @@ var _ = require('lodash');
 module.exports = {
 
     test: function(req, res){
-        Connection.create({
+        var test = {
+            username: 'test',
+            promo: 'test',
+            start: new Date()
+        };
+        var conn = new Connection._model(test);
+/*        Connection.create({
             username : 'test',
             promo : 'test',
             ip : 'test'
@@ -19,6 +25,9 @@ module.exports = {
                 res.status(200).json(created);
             else
                 res.status(400).json(err);
+        });*/
+        res.json({
+            data: conn
         });
     },
 
