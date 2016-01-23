@@ -38,28 +38,16 @@ module.exports.routes = {
 
   'get /data': 'ConnectionController.getData',
   'get /dataTmp': 'ConnectionController.getDataTmp',
-  'get /test': 'ConnectionController.test',
-<<<<<<< HEAD
-  /*'get /connections/current/room/:id': 'ConnectionController.currentConnectionsInARoom',
-  'get /connections/current/room/:id/users': 'ConnectionController.currentConnectedsInARoom',
-  'get /connections/current/nb': 'ConnectionController.currentConnectedNb',
-  'get /connection/:username': 'ConnectionController.isConnected',
   'get /initpcs': 'PcController.init',
-  'get /initrooms': 'RoomController.init',*/
-  'get /rooms': 'RoomController.all',
-  'get /rooms/availability': 'RoomController.roomsAvailability',
-  'get /rooms/:id': 'RoomController.one'
-=======
+  'get /initrooms': 'RoomController.init',
+  'get /test': 'ConnectionController.test',
   'get /connections/current/room/:id': 'ConnectionController.currentConnectionsInARoom',
   'get /connections/current/room/:id/users': 'ConnectionController.currentConnectedUsersInARoom',
   'get /connections/current/nb': 'ConnectionController.currentConnectedNb',
-  'get /connections/:username': 'ConnectionController.isConnected'
-  //'get /initpcs': 'PcController.init',
-  //'get /initrooms': 'RoomController.init',
-  //'get /rooms': 'RoomController.all',
-  //'get /room/:id': 'RoomController.one',
-  //'get /rooms/availability': 'RoomController.roomsAvailability'
->>>>>>> add connection api
+  'get /connections/:username': 'ConnectionController.isConnected',
+  'get /rooms': 'RoomController.all',
+  'get /rooms/availability': 'RoomController.roomsAvailability',
+  'get /rooms/:id': 'RoomController.one'
 
 
   /***************************************************************************
