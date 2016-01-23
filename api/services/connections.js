@@ -1,6 +1,3 @@
-/**
- * Created by kevin gosse on 29/12/2015.
- */
 var net = require('net');
 var fs = require('fs');
 var moment = require('moment');
