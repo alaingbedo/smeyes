@@ -3,6 +3,8 @@ A dashboard (Mobile application and Web application) that shows all the PC’s a
 
 # API
 
+**base url**: http://smeyes.herokuapp.com/ 
+
 #### GET /rooms : returns all the rooms
 
 ```json
