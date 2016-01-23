@@ -5,7 +5,7 @@ var http = require('http'); //importing http
 var options = {
     host: 'smeyes.herokuapp.com',
     port: 80,
-    path: '/test'
+    path: '/data'
 };
 console.log("======get_connections");
 http.get(options, function(res) {
