@@ -56,6 +56,7 @@ module.exports = {
     one : function(req, res){
         Room
             .findOne()
+            .populate('pcs')
             .where({id : req.param('id')})
             .exec((err, out)=>{
                 if (!err)
@@ -77,7 +78,7 @@ module.exports = {
                             var roomAv = {};
                             var nb = connections.filter((d)=> d.pc.room == theRoom.id).length;
                             roomAv.room = theRoom.name;
-                            var percent = (nb*100)/theRoom.pcs.length;
+                            var percent = 100 - (nb * 100)/theRoom.pcs.length;
                             roomAv.availability = Math.round(percent*100)/100;
                             result.push(roomAv);
                         });
