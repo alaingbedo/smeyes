@@ -180,14 +180,15 @@ module.exports = {
 
     isConnected: (req, res) => {
         Connection
-            .find({
+            .findOne({
                 end: null,
                 username: req.param('username')
             })
+            .populate('pc')
             .then((conn) => {
-                res.json({
-                    connected: conn.length > 0
-                })
+                res.json(Object.assign({}, conn, {
+                    connected: conn !== undefined
+                }));
             })
             .catch((err) => {
                 console.log('err: ', err);
@@ -195,5 +196,5 @@ module.exports = {
             })
     }
 
-}
+};
 
