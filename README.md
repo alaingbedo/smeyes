@@ -45,7 +45,7 @@ A dashboard (Mobile application and Web application) that shows all the PC’s a
 ```json
 // SUCCESS RESPONSE DATA
 {
-    nb: integer
+    "nb": "integer"
 }
 ```
 
@@ -54,12 +54,12 @@ A dashboard (Mobile application and Web application) that shows all the PC’s a
 ```json
 // GET REQUEST DATA
 {
-    username: string
+    "username": "string"
 }
 
 // SUCCESS RESPONSE DATA
 {
-    connected: boolean
+    "connected": "boolean"
 }
 ```
 

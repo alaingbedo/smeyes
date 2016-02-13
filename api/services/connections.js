@@ -1,6 +1,6 @@
 var net = require('net');
 var fs = require('fs');
-const moment = require('moment');
+const moment = require('moment-timezone');
 
 /*
  @description :: alert duplicate connection in the collection's array
@@ -39,7 +39,7 @@ function parsing(data){
                 promo : splitRes2[9],
                 ip : splitRes2[2],
                 id : null,
-                start : moment().format('YYYY-MM-DD HH:mm:ss')
+                start : moment().tz("Europe/Paris").format('YYYY-MM-DD HH:mm:ss')
             };
 
             if(!alertDuplicatedData(connection, connectionsTable))

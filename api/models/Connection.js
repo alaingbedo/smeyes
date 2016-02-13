@@ -1,9 +1,11 @@
 /**
-* Connection.js
-*
-* @description :: Object that represent a connection make by an student to a computer
-* @docs        :: http://sailsjs.org/#!documentation/models
-*/
+ * Connection.js
+ *
+ * @description :: Object that represent a connection make by an student to a computer
+ * @docs        :: http://sailsjs.org/#!documentation/models
+ */
+
+let moment = require('moment-timezone');
 
 module.exports = {
 
@@ -17,11 +19,11 @@ module.exports = {
             required : true
         },
         start : {
-            type : 'datetime',
+            type : 'string',
             required : true
         },
         end : {
-            type : 'datetime'
+            type : 'string'
         },
         pc : {
             model : 'pc'
