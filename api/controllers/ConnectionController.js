@@ -23,7 +23,7 @@ module.exports = {
     },
 
     getData: function (req, res) {
-        let date = moment().tz("Europe/Paris");
+/*        let date = moment().tz("Europe/Paris");
         let day = date.get('day');
         let hour = date.get('hour');
         if (day == 7 && hour == 23)
@@ -36,7 +36,7 @@ module.exports = {
                     res.send('all the connections have been deleted !!!');
                 });
         }
-        else {
+        else {*/
             connections().then((d)=> {
                 //Get currents connections and losts connections
                 Connection.find({end: null})
@@ -116,7 +116,7 @@ module.exports = {
                         res.status(500).send(reason);
                     });
             });
-        }
+        //}
     },
 
     getDataTmp : function(req, res){
