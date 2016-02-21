@@ -15,13 +15,222 @@ angular.module('app')
             function($stateProvider, $urlRouterProvider) {
 
                 $urlRouterProvider
-                    .otherwise('/app/dashboard');
+                    .otherwise('/app/mydashboard');
                 $stateProvider
                     .state('app', {
                         abstract: true,
                         url: '/app',
                         templateUrl: 'views/layout.html'
                     })
+                    .state('app.mydashboard', {
+                        url: '/mydashboard',
+                        templateUrl: 'views/mydashboard.html',
+                        ncyBreadcrumb: {
+                            label: 'myDashboard',
+                            description: ''
+                        },
+                        resolve: {
+                            deps: [
+                                '$ocLazyLoad',
+                                function($ocLazyLoad) {
+                                    return $ocLazyLoad.load({
+                                        serie: true,
+                                        files: [
+                                            'lib/jquery/charts/sparkline/jquery.sparkline.js',
+                                            'lib/jquery/charts/easypiechart/jquery.easypiechart.js',
+                                            'lib/jquery/charts/flot/jquery.flot.js',
+                                            'lib/jquery/charts/flot/jquery.flot.resize.js',
+                                            'lib/jquery/charts/flot/jquery.flot.pie.js',
+                                            'lib/jquery/charts/flot/jquery.flot.tooltip.js',
+                                            'lib/jquery/charts/flot/jquery.flot.orderBars.js',
+                                            'app/controllers/mydashboard.js',
+                                            'app/services/MyDashboardService.js',
+                                            'lib/jquery/charts/chartjs/chart.js',
+                                            'app/directives/realtimechart.js'
+                                        ]
+                                    });
+                                }
+                            ]
+                        }
+                    })
+
+
+                    .state('app.pasteur', {
+                        url: '/pasteur',
+                        templateUrl: 'views/pasteur.html',
+                        ncyBreadcrumb: {
+                            label: 'Pasteur',
+                            description: 'Informations of room Pasteur'
+                        },
+                        resolve: {
+                            deps: [
+                                '$ocLazyLoad',
+                                function($ocLazyLoad) {
+                                    return $ocLazyLoad.load({
+                                        serie: true,
+                                        files: [
+                                            'lib/jquery/datatable/dataTables.bootstrap.css',
+                                            'lib/jquery/datatable/jquery.dataTables.min.js',
+                                            'lib/jquery/datatable/ZeroClipboard.js',
+                                            'lib/jquery/datatable/dataTables.tableTools.min.js',
+                                            'lib/jquery/datatable/dataTables.bootstrap.min.js',
+                                            'app/controllers/pasteur.js',
+                                            'app/services/MyService.js'
+                                        ]
+                                    });
+                                }
+                            ]
+                        }
+                    })
+
+
+                    .state('app.cisco', {
+                        url: '/cisco',
+                        templateUrl: 'views/cisco.html',
+                        ncyBreadcrumb: {
+                            label: 'Cisco',
+                            description: 'Informations of room Cisco'
+                        },
+                        resolve: {
+                            deps: [
+                                '$ocLazyLoad',
+                                function($ocLazyLoad) {
+                                    return $ocLazyLoad.load({
+                                        serie: true,
+                                        files: [
+                                            'lib/jquery/datatable/dataTables.bootstrap.css',
+                                            'lib/jquery/datatable/jquery.dataTables.min.js',
+                                            'lib/jquery/datatable/ZeroClipboard.js',
+                                            'lib/jquery/datatable/dataTables.tableTools.min.js',
+                                            'lib/jquery/datatable/dataTables.bootstrap.min.js',
+                                            'app/controllers/cisco.js',
+                                            'app/services/MyService.js'
+                                        ]
+                                    });
+                                }
+                            ]
+                        }
+                    })
+
+
+                    
+
+
+
+                    .state('app.midlab', {
+                        url: '/midlab',
+                        templateUrl: 'views/midlab.html',
+                        ncyBreadcrumb: {
+                            label: 'Midlab',
+                            description: 'Informations of room MidLab'
+                        },
+                        resolve: {
+                            deps: [
+                                '$ocLazyLoad',
+                                function($ocLazyLoad) {
+                                    return $ocLazyLoad.load({
+                                        serie: true,
+                                        files: [
+                                            'lib/jquery/datatable/dataTables.bootstrap.css',
+                                            'lib/jquery/datatable/jquery.dataTables.min.js',
+                                            'lib/jquery/datatable/ZeroClipboard.js',
+                                            'lib/jquery/datatable/dataTables.tableTools.min.js',
+                                            'lib/jquery/datatable/dataTables.bootstrap.min.js',
+                                            'app/controllers/midlab.js',
+                                            'app/services/MyService.js'
+                                        ]
+                                    });
+                                }
+                            ]
+                        }
+                    })
+
+                    .state('app.labsr', {
+                        url: '/labsr',
+                        templateUrl: 'views/labsr.html',
+                        ncyBreadcrumb: {
+                            label: 'LabSR',
+                            description: 'Informations of room LabSR'
+                        },
+                        resolve: {
+                            deps: [
+                                '$ocLazyLoad',
+                                function($ocLazyLoad) {
+                                    return $ocLazyLoad.load({
+                                        serie: true,
+                                        files: [
+                                            'lib/jquery/datatable/dataTables.bootstrap.css',
+                                            'lib/jquery/datatable/jquery.dataTables.min.js',
+                                            'lib/jquery/datatable/ZeroClipboard.js',
+                                            'lib/jquery/datatable/dataTables.tableTools.min.js',
+                                            'lib/jquery/datatable/dataTables.bootstrap.min.js',
+                                            'app/controllers/labsr.js',
+                                            'app/services/MyService.js'
+                                        ]
+                                    });
+                                }
+                            ]
+                        }
+                    })
+
+                    .state('app.sm14', {
+                        url: '/labsr',
+                        templateUrl: 'views/sm14.html',
+                        ncyBreadcrumb: {
+                            label: 'SM 14',
+                            description: 'Informations of room SM 14'
+                        },
+                        resolve: {
+                            deps: [
+                                '$ocLazyLoad',
+                                function($ocLazyLoad) {
+                                    return $ocLazyLoad.load({
+                                        serie: true,
+                                        files: [
+                                            'lib/jquery/datatable/dataTables.bootstrap.css',
+                                            'lib/jquery/datatable/jquery.dataTables.min.js',
+                                            'lib/jquery/datatable/ZeroClipboard.js',
+                                            'lib/jquery/datatable/dataTables.tableTools.min.js',
+                                            'lib/jquery/datatable/dataTables.bootstrap.min.js',
+                                            'app/controllers/sm14.js',
+                                            'app/services/MyService.js'
+                                        ]
+                                    });
+                                }
+                            ]
+                        }
+                    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     .state('app.dashboard', {
                         url: '/dashboard',
                         templateUrl: 'views/dashboard.html',

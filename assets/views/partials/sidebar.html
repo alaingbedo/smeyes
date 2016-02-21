@@ -1,8 +1,8 @@
 ﻿    <!-- Page Sidebar Header-->
 <div class="sidebar-header-wrapper">
-    <input type="text" class="searchinput" />
+    <input type="text" placeholder="Search a student" class="searchinput" />
     <i class="searchicon fa fa-search"></i>
-    <div class="searchhelper">Search Reports, Charts, Emails or Notifications</div>
+    <div class="searchhelper">Search a student</div>
 </div>
 <!-- /Page Sidebar Header -->
 <!-- Sidebar Menu -->
@@ -13,6 +13,50 @@
             <i class="menu-icon glyphicon glyphicon-home"></i>
             <span class="menu-text"> Dashboard </span>
         </a>
+    </li>
+    <!--myDashboard-->
+    <li ui-sref-active="active">
+        <a ui-sref="app.mydashboard">
+            <i class="menu-icon glyphicon glyphicon-home"></i>
+            <span class="menu-text"> My Dashboard </span>
+        </a>
+    </li>
+    <!--Rooms-->
+    <li >
+        <a href="#" class="menu-dropdown">
+            <i class="menu-icon fa fa-desktop"></i>
+            <span class="menu-text"> Kremlin Bicêtre </span>
+
+            <i class="menu-expand"></i>
+        </a>
+
+        <ul class="submenu">
+            <li ui-sref-active="active">
+                <a ui-sref="app.pasteur">
+                    <span class="menu-text">Pasteur</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.cisco">
+                    <span class="menu-text">Cisco</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.midlab">
+                    <span class="menu-text">Midlab</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.labsr">
+                    <span class="menu-text">LabSR</span>
+                </a>
+            </li>
+            <li ui-sref-active="active">
+                <a ui-sref="app.sm14">
+                    <span class="menu-text">SM 14</span>
+                </a>
+            </li>
+        </ul>
     </li>
     <!--Databoxes-->
     <li ui-sref-active="active">

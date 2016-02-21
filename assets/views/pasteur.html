@@ -1,0 +1,59 @@
+<div ng-controller="PasteurCtrl">
+	<div class="row">
+		<div class="col-xs-12 col-md-6 col-lg-12">
+		    <div class="well with-header">
+		        <div class="header bg-blue">
+		            Users Connected
+		        </div>
+		        <table class="table table-bordered">
+		            <thead class="bordered-dark">
+		            	<tr>
+		            	    <th>
+		            	        <input placeholder="Search ..." type="text" ng-model="query"/>
+		            	    </th>
+		            	</tr>
+			            <tr>
+			                <th>Place in the room</th>
+			                <th>Login</th>
+			                <th>Promo</th>
+			                <th>Start connection</th>
+			            </tr>
+		            </thead>
+		            <tbody>
+			            <tr ng-repeat="user in currentConnected | filter: query">
+			                <td>row: {{user.pc.r}}, pc: {{user.pc.p}}</td>
+			                <td><a href="#" ng-click="openModal($index)">{{user.username}}</a></td>
+			                <td>{{user.promo}}</td>
+			                <td>{{user.start}}</td>
+			            </tr>
+		            </tbody>
+		        </table>
+		    </div>
+
+
+
+
+
+		    <!-- Modal for display User Infos -->
+		    <script type="text/ng-template" id="myModal.html">
+		        <div class="modal-header">
+		            <button type="button" class="close" data-dismiss="modal">&times;</button>
+		            <h4 class="modal-title">Student Informations</h4>
+		        </div>
+		             <div class="modal-body">
+		             	<ul>
+             	            <li>Place in the room: <strong>row: {{user.pc.r}}, pc: {{user.pc.p}}</strong></li>
+             	            <li>Login: <strong>{{user.username}}</strong></li>
+             	            <li>Promo: <strong>{{user.promo}}</strong></li>
+             	            <li>Connection start: <strong>{{user.start}}</strong></li>
+             	            <li>Computer IP: <strong>{{user.pc.ip}}</strong></li>
+             	        </ul>
+		             </div>
+		        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-default" ng-click="cancel()">Close</button>
+		        </div>
+		    </script>
+		</div>
+	</div>
+</div>
