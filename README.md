@@ -63,5 +63,21 @@ A dashboard (Mobile application and Web application) that shows all the PC’s a
 }
 ```
 
+#### GET /connections/lastsevendays: returns the total of all the connections for each of the last seven days
+
+```json
+{
+    "day7": "int",
+    "day6": "int",
+    "day5": "int",
+    "day4": "int",
+    "day3": "int",
+    "day2": "int",
+    "day1": "int",
+    "day0": "int"
+}
+```
+
+
 
 

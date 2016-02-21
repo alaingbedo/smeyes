@@ -41,13 +41,14 @@ module.exports.routes = {
   'get /initpcs': 'PcController.init',
   'get /initrooms': 'RoomController.init',
   'get /test': 'ConnectionController.test',
+  'get /connections/lastsevendays': 'ConnectionController.lastsevendays',
   'get /connections/current/room/:id': 'ConnectionController.currentConnectionsInARoom',
   'get /connections/current/room/:id/users': 'ConnectionController.currentConnectedUsersInARoom',
   'get /connections/current/nb': 'ConnectionController.currentConnectedNb',
   'get /connections/:username': 'ConnectionController.isConnected',
   'get /rooms': 'RoomController.all',
   'get /rooms/availability': 'RoomController.roomsAvailability',
-  'get /rooms/:id': 'RoomController.one'
+  'get /rooms/:id': 'RoomController.one',
 
 
   /***************************************************************************
