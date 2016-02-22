@@ -12,7 +12,7 @@
 	                    </div>
 	                    <div class="databox-right">
 	                        <span class="databox-number themesecondary">{{room.room | uppercase}}</span>
-	                        <div class="databox-text darkgray">{{room.availability | number : 0}}%</div>
+	                        <div class="databox-text darkgray">{{room.availability | number : 0}}% available</div>
 	                        <div class="databox-stat themesecondary radius-bordered">
 	                            <i class="stat-icon icon-lg fa fa-star-o"></i>
 	                            <i class="stat-icon icon-lg fa fa-star-o"></i>
@@ -29,7 +29,7 @@
 	                    </div>
 	                    <div class="databox-right">
 	                        <span class="databox-number themethirdcolor">{{room.room | uppercase}}</span>
-	                        <div class="databox-text darkgray">{{room.availability | number : 0}}%</div>
+	                        <div class="databox-text darkgray">{{room.availability | number : 0}}% available</div>
 	                        <div class="databox-stat themethirdcolor radius-bordered">
 	                            <i class="stat-icon icon-lg fa fa-star"></i>
 	                            <i class="stat-icon icon-lg fa fa-star"></i>
@@ -48,7 +48,7 @@
 	                    </div>
 	                    <div class="databox-right">
 	                        <span class="databox-number themeprimary">{{room.room | uppercase}}</span>
-	                        <div class="databox-text darkgray">{{room.availability | number : 0}}%</div>
+	                        <div class="databox-text darkgray">{{room.availability | number : 0}}% available</div>
 	                        <div class="databox-stat themeprimary radius-bordered">
 	                            <i class="stat-icon icon-lg fa fa-star"></i>
 	                            <i class="stat-icon icon-lg fa fa-star"></i>
@@ -59,6 +59,28 @@
 	            </div>
             </div>
         </div>
+    </div>
+
+
+    <div class="row">
+            <div class="widget">
+                <div class="widget-header">
+                    <span class="widget-caption">Chart of the total of students who were connected last week</span>
+                    <div class="widget-buttons">
+                        <a href="" widget-maximize></a>
+                        <a href="" widget-collapse></a>
+                        <a href="" widget-dispose></a>
+                    </div>
+                </div>
+                <div class="widget-body">
+
+                    <div class="row">
+                        <div class="chartcontainer">
+                            <canvas id="line" height="600" width="1200"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
     </div>
 
 
@@ -77,10 +99,10 @@
 
             <div class="chartcontainer">
                 <canvas id="bar" height="300" width="600"></canvas>
-
             </div>
         </div>
     </div>
+
 
 
 </div>

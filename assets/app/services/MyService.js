@@ -23,5 +23,14 @@ angular.module('app').service('MyService', function($http, $q) {
         defer.reject(err);
       });
       return defer.promise;
+    },
+    'getConnected': function() {
+      var defer = $q.defer();
+      $http.get('/connections/lastsevendays').success(function(resp){
+        defer.resolve(resp);
+      }).error( function(err) {
+        defer.reject(err);
+      });
+      return defer.promise;
     }
   }})

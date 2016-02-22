@@ -3,7 +3,7 @@
 app
     // Dashboard Box controller 
     .controller('MyDashboardCtrl', [
-        '$rootScope', '$scope', 'MyDashboardService', function($rootScope, $scope, MyDashboardService) {
+        '$rootScope', '$scope', 'MyDashboardService', 'MyService', '$http', function($rootScope, $scope, MyDashboardService, MyService, $http) {
 
 
         	$scope.barChartData;
@@ -12,6 +12,33 @@ app
         	$scope.percents = [];
         	$scope.DataTransferChartData = [];
         	$scope.DataTransferChartOptions = [];
+            $scope.connectedList = [];
+
+
+
+
+
+            MyService.getConnected().then(function(resp) {
+                $scope.connectedList = resp;
+                $scope.lineChartData = {
+                    labels: [resp[0].day, resp[1].day, resp[2].day, resp[3].day, resp[4].day, resp[5].day, resp[6].day, resp[7].day + " (today)"],
+                    datasets: [
+                        {
+                            fillColor: "rgba(93, 178, 255,.4)",
+                            strokeColor: "rgba(93, 178, 255,.7)",
+                            pointColor: "rgba(93, 178, 255,.7)",
+                            pointStrokeColor: "#fff",
+                            data: [resp[0].total, resp[1].total, resp[2].total, resp[3].total, resp[4].total, resp[5].total, resp[6].total, resp[7].total]
+                        }
+                    ]
+
+                };
+                new Chart(document.getElementById("line").getContext("2d")).Line($scope.lineChartData);
+            }, function(err) {
+                console.log(err);
+            });
+
+            
 
 
 
@@ -79,6 +106,9 @@ app
         		        content: "<b>%s</b> : <span>%x</span> : <span>%y</span>",
         		    }
         		};
+
+
+
         	});
 
 

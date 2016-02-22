@@ -15,7 +15,7 @@ angular.module('app')
             function($stateProvider, $urlRouterProvider) {
 
                 $urlRouterProvider
-                    .otherwise('/app/mydashboard');
+                    .otherwise('/app/dashboard');
                 $stateProvider
                     .state('app', {
                         abstract: true,
@@ -23,10 +23,10 @@ angular.module('app')
                         templateUrl: 'views/layout.html'
                     })
                     .state('app.mydashboard', {
-                        url: '/mydashboard',
+                        url: '/dashboard',
                         templateUrl: 'views/mydashboard.html',
                         ncyBreadcrumb: {
-                            label: 'myDashboard',
+                            label: 'Dashboard',
                             description: ''
                         },
                         resolve: {
@@ -45,8 +45,11 @@ angular.module('app')
                                             'lib/jquery/charts/flot/jquery.flot.orderBars.js',
                                             'app/controllers/mydashboard.js',
                                             'app/services/MyDashboardService.js',
+                                            'app/services/MyService.js',
                                             'lib/jquery/charts/chartjs/chart.js',
-                                            'app/directives/realtimechart.js'
+                                            'app/directives/realtimechart.js',
+                                            'lib/jquery/charts/morris/raphael-2.0.2.min.js',
+                                            'lib/jquery/charts/morris/morris.js'
                                         ]
                                     });
                                 }
@@ -198,6 +201,14 @@ angular.module('app')
                                     });
                                 }
                             ]
+                        }
+                    })
+
+                    .state('app.contact', {
+                        url: '/contact',
+                        templateUrl: 'views/contact.html',
+                        ncyBreadcrumb: {
+                            label: 'Contact Us'
                         }
                     })
 
