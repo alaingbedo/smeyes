@@ -203,6 +203,7 @@ module.exports = {
 
     lastsevendays: (req, res) => {
         let days = {};
+        let data = [];
         let today = moment().format();
         Connection
             .find({})
@@ -210,6 +211,10 @@ module.exports = {
                 for (var i = 8; i >= 1; --i) {
                     let attr = 'day' + (i - 1);
                     let current = moment(today).subtract(i - 1, 'days');
+                    let input = {
+                        day: current.format("dddd"),
+                        total: 0
+                    };
                     days[attr] = 0;
                     results.forEach((y) => {
                         let start = moment(y.start, 'YYYY-MM-DD HH:mm:ss');
@@ -218,8 +223,10 @@ module.exports = {
                             ++days[attr];
                         }
                     });
+                    input.total = days[attr];
+                    data.push(input);
                 }
-                res.json(days);
+                res.json(data);
             })
             .catch((err) => {
                 console.log('err: ', err);
